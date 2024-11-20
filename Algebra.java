@@ -1,5 +1,4 @@
 
-// the Java operations a + b, a - b, a * b, a / b, a % b, and without calling 
 // Math.sqrt. All the functions in this class operate on int values and
 // return int values.
 
@@ -25,6 +24,14 @@ public class Algebra {
 
 	// Returns x1 + x2
 	public static int plus(int x1, int x2) {
+		if (x1 < 0 && x2 > 0){ // x1 is negative x2 is positive
+			int i = 0;
+			while ( i < x2){
+				x1++;
+				i++;
+			}
+			return x1;
+		}
 		if (x2 == 0){
 			return x1;
 		}
@@ -40,30 +47,72 @@ public class Algebra {
 			}
 			return x1;
 		}
+		if (x1 < 0){ // x1 negative
+			while (x1 < 0){
+				x1++;
+				x2--;
+			}
+			return x2;
+		}
+		if (x2 < 0){ // x2 negative
+			while (x2 < 0){
+				x2++;
+				x1--;
+			}
+			return x1;
+		}	
 		return x1;
 	}
 
 	// Returns x1 - x2
 	public static int minus(int x1, int x2) {
-		if (x2 == 0){ 
+		if (0 <= x2){
+			for (int i = 0 ; i < x2 ; i++){
+				x1--;
+			}
 			return x1;
 		}
-			int i = 0;
-			while (i < x2)	{
-				x1--;
-				i++;
+		else {
+			if ( x1 < 0 && x2 > 0){
+				for ( int i = 0 ; i>x2 ; i--){
+					x1++;
+				}
+				return x1;
 			}
-		return x1;
+			for (int i = 0 ; i > x2 ; i--){
+				x1++;
+			}
+			return x1;
+		}
 	}
+
 
 	// Returns x1 * x2
 	public static int times(int x1, int x2) {
 		{
-			int i = 0;
+			int j = 0;
 			int result = 0;
-			while (i < x2) {
+			if ( x1 < 0 && x2 < 0){ // both are negative!
+				for (int i = 0 ; i > x2 ; i--){
+					result = minus(result, x1);
+				}
+				return result;
+			}
+			if (x1 <0){ // x1 is negative!
+				for (int i=0; i<x2;i++){
+					result = plus(result, x1);
+				}
+				return result;
+			}
+			if (x2 < 0){ // x2 is negative!
+				for (int i=0; i<x1;i++){
+					result = plus(result, x2);
+				}
+				return result;
+			}
+			while (j < x2) { // none negative!
 				result = plus(result, x1);
-				i++;
+				j++;
 			}
 			return result;
 		}
@@ -71,6 +120,9 @@ public class Algebra {
 
 	// Returns x^n (for n >= 0)
 	public static int pow(int x, int n) {
+		if ( n == 0){
+			return 1;
+		}	
 		int i = 1;
 		int result = 0;
 		result = x;
@@ -84,6 +136,23 @@ public class Algebra {
 	// Returns the integer part of x1 / x2 
 	public static int div(int x1, int x2) {
 		int result = 0;
+		if ( x1 < 0 && x2 < 0){ // both negative!
+			while (x1 < 0){ 
+				x1 = minus(x1,x2);
+				result++;
+			}
+			return result;
+			}
+		if ( x1 < 0) {	// x1 is negative
+			System.out.println("x1 is" +x1); 
+			while (x1 <0){
+				x1 = plus(x1,x2);
+				System.out.println(x1);
+				result--;
+			}
+			System.out.println(result);
+			return result;
+		}
 		while ( x1 > 0){
 			x1 = minus(x1,x2);
 			if ( x1 < x2){
@@ -92,10 +161,16 @@ public class Algebra {
 			result++;
 		}
 		return result;
-	}
+}
 
 	// Returns x1 % x2
 	public static int mod(int x1, int x2) {
+		if (  x1 == 0){
+			return x1;
+		}
+		if ( x2 == 0 ){
+			return x1;
+		}
 		int result = 0;
 		int x3=x2;
 		while ( x1 > 0){
