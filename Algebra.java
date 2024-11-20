@@ -143,8 +143,7 @@ public class Algebra {
 			}
 			return result;
 			}
-		if ( x1 < 0) {	// x1 is negative
-			System.out.println("x1 is" +x1); 
+		if ( x1 < 0) {	// x1 is negative 
 			while (x1 <0){
 				x1 = plus(x1,x2);
 				System.out.println(x1);
