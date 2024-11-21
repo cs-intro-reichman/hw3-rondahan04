@@ -85,11 +85,11 @@ public class Anagram {
 	// characters as the given string, re-arranged in a random order. 
 	public static String randomAnagram(String str) {
 		String ans = "";
-		String str2=str;
+		String str2=str; // copy of str so str will not be changed
 		   for (int i = 0 ; i<str.length(); i++){
-			   int random = (int)(Math.random() * str2.length());
-			   ans = ans + str2.charAt(random);
-			   str2 = str2.substring(0, random) + str2.substring(random + 1);
+			   int random = (int)(Math.random() * str2.length()); // takes a random letter
+			   ans = ans + str2.charAt(random); // adds the letter to the new string
+			   str2 = str2.substring(0, random) + str2.substring(random + 1); // removes the letter from str2
 		   }
 		   return ans;
 	}
